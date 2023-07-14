@@ -20,7 +20,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
@@ -29,29 +29,58 @@
           <li class="nav-item">
             <a class="nav-link" href="indev.html">Indevelopment</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="cal.html">Fitness Calculator</a>
           </li>
         </ul>
       </div>
     </nav>
-    <main>
-      <center>
-        <div class="jumbotron">
-          <div class="container">
-            <h1>Welcome to Youngsthenics</h1>
-            <p>
-              Join us to explore the world of calisthenics and achieve your
-              fitness goals using your own body weight and <br />
-              check out our products
-            </p>
-            <a href="about.html" class="btn btn-primary btn-lg">Learn More</a>
-          </div>
+    <main class="container mt-5">
+      <h1>Pull-Up Strength Calculator</h1>
+      <p>
+        Enter the number of pull-ups you can do to calculate your pull-up
+        strength:
+      </p>
+      <form id="pullup-form">
+        <div class="form-group">
+          <label for="pullup-count">Number of Pull-Ups:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="pullup-count"
+            required
+          />
         </div>
-      </center>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+      </form>
+      <div id="strength-output" class="mt-4"></div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#pullup-form").submit(function (event) {
+          event.preventDefault();
+          let pullupCount = parseInt($("#pullup-count").val());
+          let strengthLevel = getStrengthLevel(pullupCount);
+          $("#strength-output").html(
+            "Your pull-up strength level is: " + strengthLevel
+          );
+        });
+      });
+
+      function getStrengthLevel(count) {
+        if (count >= 20) {
+          return "Advanced";
+        } else if (count >= 5) {
+          return "Intermediate";
+        } else if (count >= 1) {
+          return "Beginner";
+        } else {
+          return "Needs Improvement";
+        }
+      }
+    </script>
   </body>
 </html>
